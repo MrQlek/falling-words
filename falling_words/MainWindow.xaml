@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:falling_words"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="768" Width="1024" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="311*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="431*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="Canvas1" HorizontalAlignment="Left" Height="650" VerticalAlignment="Top" Width="675" Grid.ColumnSpan="3"/>
+        <Label Content="Points&#xD;&#xA;" HorizontalAlignment="Left" Margin="363,39,0,0" VerticalAlignment="Top" Width="68" Grid.Column="2"/>
+        <TextBox x:Name="UserInput" HorizontalAlignment="Left" Height="23" Margin="270,692,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="UserInput_TextChanged"/>
+
     </Grid>
 </Window>
