@@ -22,42 +22,47 @@ namespace falling_words
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DateTime StartTime;
+        private int NumberOfWroteChars;
+        private DispatcherTimer TimerGenerateNewWord = new DispatcherTimer();
+        private int WordsSpeed = 1000;
+        private int WordsLength = 3;
+
+
         public MainWindow()
         {
             InitializeComponent();
-            Text(0, 0, "sth2", Color.FromRgb(0, 0, 0));
-            Text(30, 30, "sth", Color.FromRgb(0, 0, 0));
 
+            StartTime =  DateTime.Now;
+            NumberOfWroteChars = 0;
 
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += setNewWordsPosition;
-            timer.Start();
+            DispatcherTimer timerAnimation = new DispatcherTimer();
+            timerAnimation.Interval = TimeSpan.FromMilliseconds(1);
+            timerAnimation.Tick += SetNewWordsPosition;
+            timerAnimation.Start();
+
+            TimerGenerateNewWord.Interval = TimeSpan.FromMilliseconds(60000 / (WordsSpeed / WordsLength));
+            TimerGenerateNewWord.Tick += GenerateNewWord;
+            TimerGenerateNewWord.Start();
+
+            DispatcherTimer timerChangeWordsSpeed = new DispatcherTimer();
+            timerChangeWordsSpeed.Interval = TimeSpan.FromSeconds(5);
+            timerChangeWordsSpeed.Tick += SetNewWordsSpeed;
+            timerChangeWordsSpeed.Start();
         }
 
-        
-        private void Text(double x, double y, string text, Color color)
-        {
-            Label word = new Label();
-            word.Content = text;
-            word.Foreground = new SolidColorBrush(color);
-            word.BorderBrush = Brushes.Black;
-            word.BorderThickness = new Thickness(2);
-            Canvas.SetLeft(word, x);
-            Canvas.SetTop(word, y);
-            Canvas1.Children.Add(word);
-        }
-        void setNewWordsPosition(object sender, EventArgs e)
+        void SetNewWordsPosition(object sender, EventArgs e)
         {
             foreach(var textBox in Canvas1.Children)
             {
                 try
                 {
-                    Label word = (Label)textBox;
-                    Canvas.SetTop(word, Canvas.GetTop(word) + 1);
-                    if (Canvas.GetTop(word) == 650)
+                    Label wordLabel = (Label)textBox;
+                    Canvas.SetTop(wordLabel, Canvas.GetTop(wordLabel) + 2 + (WordsSpeed - 60)/60/4);
+                    if (Canvas.GetTop(wordLabel) == 600)
                     {
-                        MessageBoxResult result = MessageBox.Show("Would you like to greet the world with a \"Hello, world\"?", "My App", MessageBoxButton.YesNo);
+                        //TimerGenerateNewWord.Stop();
+                        //MessageBoxResult result = MessageBox.Show("Would you like to greet the world with a \"Hello, world\"?", "My App", MessageBoxButton.YesNo);
                     }
                 }
                 catch
@@ -74,10 +79,11 @@ namespace falling_words
             {
                 try
                 {
-                    Label word = (Label)textBox;
-                    if (UserInput.Text == (string)word.Content)
+                    Label wordLabel = (Label)textBox;
+                    if (UserInput.Text == (string)wordLabel.Content)
                     {
-                        wordsToRemove.Add(word);
+                        wordsToRemove.Add(wordLabel);
+                        RefreshResult(UserInput.Text.Length);
                         UserInput.Text = "";
                     }
                 }
@@ -90,6 +96,39 @@ namespace falling_words
             {
                 Canvas1.Children.Remove(wordToRemove);
             }
+        }
+
+        private void RefreshResult(int wordLength)
+        {
+            NumberOfWroteChars += wordLength;
+            double timeFromStart = (DateTime.Now - StartTime).TotalMinutes;
+            Result.Content = NumberOfWroteChars/timeFromStart;
+        }
+
+        private void GenerateNewWord(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            Label wordLabel = new Label
+            {
+                Content = Words.GetWord(WordsLength),
+                Foreground = new SolidColorBrush(Color.FromRgb(0,0,0)),
+                FontSize = 28,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(2)
+            };
+            Canvas.SetLeft(wordLabel, rnd.Next(675 - (25*WordsLength)));
+            Canvas.SetTop(wordLabel, 0);
+            Canvas1.Children.Add(wordLabel);
+        }
+
+        private void SetNewWordsSpeed(object sender, EventArgs e)
+        {
+            WordsSpeed += 5;
+            if( WordsSpeed == 700)
+            {
+                MessageBoxResult result = MessageBox.Show("You won!!!", "My App", MessageBoxButton.YesNo);
+            }
+            //TimerGenerateNewWord.Interval = TimeSpan.FromMilliseconds(60000 / (WordsSpeed / WordsLength));
         }
     }
 }
