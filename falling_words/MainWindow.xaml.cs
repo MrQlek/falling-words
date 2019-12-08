@@ -31,9 +31,13 @@ namespace falling_words
         private List<string> WordList = new List<string>();
 
 
-        public MainWindow()
+        public MainWindow(int startSpeed, int endSpeed, int wordsLength, int gameTime)
         {
             InitializeComponent();
+
+            CharSpeed = startSpeed;
+            EndCharSpeed = endSpeed;
+            WordsLength = wordsLength;
 
             StartTime =  DateTime.Now;
             NumberOfWroteChars = 0;
@@ -123,6 +127,7 @@ namespace falling_words
             Canvas.SetLeft(wordLabel, rnd.Next(675 - (25*WordsLength)));
             Canvas.SetTop(wordLabel, 0);
             Canvas1.Children.Add(wordLabel);
+            UserInput.Focus();
         }
 
         private void SetNewWordsSpeed(object sender, EventArgs e)
@@ -139,6 +144,13 @@ namespace falling_words
         private void RefreshWordSpeed(int CharSpeed)
         {
             WordsSpeed.Content = "Words Speed: \n" + CharSpeed + " chars per minute";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var mainMenuWindow = new MainMenuWindow();
+            mainMenuWindow.Show();
+            this.Close();
         }
     }
 }

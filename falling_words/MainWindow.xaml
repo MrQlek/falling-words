@@ -19,6 +19,7 @@
         <Label x:Name="WordsSpeed" Content="Words Speed:" HorizontalAlignment="Left" Margin="216,39,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
         <TextBox x:Name="UserInput" BorderThickness="0" HorizontalAlignment="Left" Height="74" Margin="43,655,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="632" TextChanged="UserInput_TextChanged" Grid.ColumnSpan="3" FontSize="36" TextAlignment="Center"/>
         <Label x:Name="Result" Content="Your average speed:&#xA;" HorizontalAlignment="Left" Margin="211,231,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
+        <Button Content="Go To Menu" Grid.Column="2" HorizontalAlignment="Left" Margin="270,606,0,0" VerticalAlignment="Top" Width="234" Click="Button_Click" FontSize="30" Background="{x:Null}"/>
 
 
     </Grid>
