@@ -25,8 +25,10 @@ namespace falling_words
         private DateTime StartTime;
         private int NumberOfWroteChars;
         private DispatcherTimer TimerGenerateNewWord = new DispatcherTimer();
-        private int WordsSpeed = 1000;
-        private int WordsLength = 3;
+        private int CharSpeed = 60;
+        private int EndCharSpeed = 700;
+        private int WordsLength = 5;
+        private List<string> WordList = new List<string>();
 
 
         public MainWindow()
@@ -35,13 +37,14 @@ namespace falling_words
 
             StartTime =  DateTime.Now;
             NumberOfWroteChars = 0;
+            RefreshWordSpeed(CharSpeed);
 
             DispatcherTimer timerAnimation = new DispatcherTimer();
             timerAnimation.Interval = TimeSpan.FromMilliseconds(1);
-            timerAnimation.Tick += SetNewWordsPosition;
+            timerAnimation.Tick += SetWordsNewPosition;
             timerAnimation.Start();
 
-            TimerGenerateNewWord.Interval = TimeSpan.FromMilliseconds(60000 / (WordsSpeed / WordsLength));
+            TimerGenerateNewWord.Interval = TimeSpan.FromMilliseconds(60000 / (CharSpeed / WordsLength));
             TimerGenerateNewWord.Tick += GenerateNewWord;
             TimerGenerateNewWord.Start();
 
@@ -51,50 +54,49 @@ namespace falling_words
             timerChangeWordsSpeed.Start();
         }
 
-        void SetNewWordsPosition(object sender, EventArgs e)
+        void SetWordsNewPosition(object sender, EventArgs e)
         {
-            foreach(var textBox in Canvas1.Children)
+            foreach (var wordLabel in Canvas1.Children.OfType<System.Windows.Controls.Label>())
             {
-                try
+                Canvas.SetTop(wordLabel, Canvas.GetTop(wordLabel) + 2 + (CharSpeed - 60)/60/4);
+                if (Canvas.GetTop(wordLabel) == 600)
                 {
-                    Label wordLabel = (Label)textBox;
-                    Canvas.SetTop(wordLabel, Canvas.GetTop(wordLabel) + 2 + (WordsSpeed - 60)/60/4);
-                    if (Canvas.GetTop(wordLabel) == 600)
-                    {
-                        //TimerGenerateNewWord.Stop();
-                        //MessageBoxResult result = MessageBox.Show("Would you like to greet the world with a \"Hello, world\"?", "My App", MessageBoxButton.YesNo);
-                    }
-                }
-                catch
-                {
-                    ;
+                    //TimerGenerateNewWord.Stop();
+                    //MessageBoxResult result = MessageBox.Show("Would you like to greet the world with a \"Hello, world\"?", "My App", MessageBoxButton.YesNo);
                 }
             }
         }
 
         private void UserInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            List<Label> wordsToRemove = new List<Label>();
-            foreach (var textBox in Canvas1.Children)
+            if (WordList.Contains(UserInput.Text))
             {
-                try
+                WordList.Remove(UserInput.Text);
+                var labelsToRemove = FindLabelsToRemove(Canvas1, UserInput.Text);
+                RemoveLabels(Canvas1, labelsToRemove);
+                RefreshResult(UserInput.Text.Length);
+                UserInput.Text = "";
+            }
+        }
+
+        private List<Label> FindLabelsToRemove(Canvas canvas, string text)
+        {
+            List<Label> wordsToRemove = new List<Label>();
+            foreach (var wordLabel in canvas.Children.OfType<System.Windows.Controls.Label>())
+            {
+                if (text == wordLabel.Content.ToString())
                 {
-                    Label wordLabel = (Label)textBox;
-                    if (UserInput.Text == (string)wordLabel.Content)
-                    {
-                        wordsToRemove.Add(wordLabel);
-                        RefreshResult(UserInput.Text.Length);
-                        UserInput.Text = "";
-                    }
-                }
-                catch
-                {
-                    ;
+                    wordsToRemove.Add(wordLabel);
                 }
             }
-            foreach (Label wordToRemove in wordsToRemove)
+            return wordsToRemove;
+        }
+
+        private void RemoveLabels(Canvas canvas, List<Label> labelsList)
+        {
+            foreach (Label wordToRemove in labelsList)
             {
-                Canvas1.Children.Remove(wordToRemove);
+                canvas.Children.Remove(wordToRemove);
             }
         }
 
@@ -102,20 +104,22 @@ namespace falling_words
         {
             NumberOfWroteChars += wordLength;
             double timeFromStart = (DateTime.Now - StartTime).TotalMinutes;
-            Result.Content = NumberOfWroteChars/timeFromStart;
+            Result.Content = "Your average speed: \n" + Math.Floor(NumberOfWroteChars/timeFromStart) + " chars per minute";
         }
 
         private void GenerateNewWord(object sender, EventArgs e)
         {
             Random rnd = new Random();
+            string newWord = Words.GetWord(WordsLength);
             Label wordLabel = new Label
             {
-                Content = Words.GetWord(WordsLength),
+                Content = newWord,
                 Foreground = new SolidColorBrush(Color.FromRgb(0,0,0)),
                 FontSize = 28,
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(2)
             };
+            WordList.Add(newWord);
             Canvas.SetLeft(wordLabel, rnd.Next(675 - (25*WordsLength)));
             Canvas.SetTop(wordLabel, 0);
             Canvas1.Children.Add(wordLabel);
@@ -123,12 +127,18 @@ namespace falling_words
 
         private void SetNewWordsSpeed(object sender, EventArgs e)
         {
-            WordsSpeed += 5;
-            if( WordsSpeed == 700)
+            CharSpeed += 5;
+            if(CharSpeed == EndCharSpeed)
             {
-                MessageBoxResult result = MessageBox.Show("You won!!!", "My App", MessageBoxButton.YesNo);
+                //MessageBoxResult result = MessageBox.Show("You won!!!", "My App", MessageBoxButton.YesNo);
             }
-            //TimerGenerateNewWord.Interval = TimeSpan.FromMilliseconds(60000 / (WordsSpeed / WordsLength));
+            TimerGenerateNewWord.Interval = TimeSpan.FromMilliseconds(60000 / (CharSpeed / WordsLength));
+            RefreshWordSpeed(CharSpeed);
+        }
+
+        private void RefreshWordSpeed(int CharSpeed)
+        {
+            WordsSpeed.Content = "Words Speed: \n" + CharSpeed + " chars per minute";
         }
     }
 }
