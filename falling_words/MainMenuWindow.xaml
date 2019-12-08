@@ -7,15 +7,30 @@
         mc:Ignorable="d"
         Title="MainMenuWindow" Height="768" Width="1024" ResizeMode="NoResize">
     <Grid Margin="0,-27,0,27">
-        <Label x:Name="___No_Name_" Content="Start Speed(between 60 and 1000): " HorizontalAlignment="Left" Height="59" Margin="33,164,0,0" VerticalAlignment="Top" Width="478" FontSize="30"/>
-        <Label x:Name="___No_Name__Copy" Content="Start Speed(between 60 and 1000): " HorizontalAlignment="Left" Height="59" Margin="33,223,0,0" VerticalAlignment="Top" Width="478" FontSize="30"/>
-        <Label x:Name="___No_Name__Copy1" Content="Words Length:" HorizontalAlignment="Left" Height="59" Margin="33,287,0,0" VerticalAlignment="Top" Width="208" FontSize="30"/>
-        <Label x:Name="___No_Name__Copy2" Content="Time Of Game (in seconds between 30 and 300): " HorizontalAlignment="Left" Height="59" Margin="33,346,0,0" VerticalAlignment="Top" Width="660" FontSize="30"/>
-        <Button Content="Start Game" HorizontalAlignment="Left" Margin="341,433,0,0" VerticalAlignment="Top" Width="170" Click="Button_Click" FontSize="30" Background="{x:Null}"/>
-        <TextBox x:Name="StartSpeed" HorizontalAlignment="Left" Height="54" Margin="511,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30"/>
-        <TextBox x:Name="EndSpeed" HorizontalAlignment="Left" Height="54" Margin="511,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30"/>
-        <TextBox x:Name="WordLength" HorizontalAlignment="Left" Height="54" Margin="511,287,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30"/>
-        <TextBox x:Name="GameTime" HorizontalAlignment="Left" Height="54" Margin="698,346,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30"/>
+        <Label x:Name="___No_Name_" Content="Start Speed(between 60 and 1000): " HorizontalAlignment="Left" Height="59" Margin="33,218,0,0" VerticalAlignment="Top" Width="478" FontSize="30"/>
+        <Label x:Name="___No_Name__Copy" Content="End Speed(between 60 and 1000): " HorizontalAlignment="Left" Height="59" Margin="33,324,0,0" VerticalAlignment="Top" Width="478" FontSize="30"/>
+        <Label x:Name="___No_Name__Copy1" Content="Words Length:" HorizontalAlignment="Left" Height="59" Margin="33,511,0,0" VerticalAlignment="Top" Width="208" FontSize="30"/>
+        <Label x:Name="___No_Name__Copy2" Content="Time Of Game (in seconds between 30 and 300): " HorizontalAlignment="Left" Height="59" Margin="33,425,0,0" VerticalAlignment="Top" Width="660" FontSize="30"/>
+        <Button Name="StartButon" Content="Start Game" HorizontalAlignment="Left" Margin="381,659,0,0" VerticalAlignment="Top" Width="170" Click="Button_Click" FontSize="30" Background="{x:Null}" IsEnabled="False"/>
+        <TextBox x:Name="StartSpeed" HorizontalAlignment="Left" Height="54" Margin="511,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30" IsEnabled="False"/>
+        <TextBox x:Name="EndSpeed" HorizontalAlignment="Left" Height="54" Margin="511,324,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30" IsEnabled="False"/>
+        <TextBox x:Name="GameTime" HorizontalAlignment="Left" Height="54" Margin="693,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30" RenderTransformOrigin="0.522,1.5" IsEnabled="False"/>
+        <RadioButton Content="3" Name="Radio3" GroupName="WordLength" IsChecked="True" HorizontalAlignment="Left" Margin="266,517,0,0" VerticalAlignment="Top" Height="32" Width="115" FontSize="30" VerticalContentAlignment="Center" RenderTransformOrigin="0.374,2.75" IsEnabled="False"/>
+        <RadioButton Content="4" Name="Radio4" GroupName="WordLength" HorizontalAlignment="Left" Margin="381,518,0,0" VerticalAlignment="Top" Height="32" Width="115" FontSize="30" VerticalContentAlignment="Center" RenderTransformOrigin="0.591,-1.281" IsEnabled="False"/>
+        <RadioButton Content="5" Name="Radio5" GroupName="WordLength" HorizontalAlignment="Left" Margin="511,519,0,0" VerticalAlignment="Top" Height="32" Width="115" FontSize="30" VerticalContentAlignment="Center" RenderTransformOrigin="0.643,6.312" IsEnabled="False"/>
+        <RadioButton Content="6" Name="Radio6" GroupName="WordLength" HorizontalAlignment="Left" Margin="631,518,0,0" VerticalAlignment="Top" Height="32" Width="115" FontSize="30" VerticalContentAlignment="Center" IsEnabled="False"/>
+        <RadioButton Content="7" Name="Radio7" GroupName="WordLength" HorizontalAlignment="Left" Margin="765,517,0,0" VerticalAlignment="Top" Height="32" Width="115" FontSize="30" VerticalContentAlignment="Center" IsEnabled="False"/>
+        <Label x:Name="EndSpeedErrorLabel" Content="You provided wrong value for end speed field&#xD;&#xA;" HorizontalAlignment="Left" Margin="33,282,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Red" Visibility="Hidden"/>
+        <Label x:Name="TimeErrorLabel" Content="You provided wrong value for time of game field" HorizontalAlignment="Left" Margin="33,388,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Red" Visibility="Hidden"/>
+        <Label x:Name="StartSpeedErrorLabel" Content="You provided wrong value for start speed field&#xD;&#xA;" HorizontalAlignment="Left" Margin="33,176,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Red" Visibility="Hidden"/>
+        <Label x:Name="___No_Name__Copy4" Content="chars per minute" HorizontalAlignment="Left" Height="59" Margin="698,218,0,0" VerticalAlignment="Top" Width="234" FontSize="30"/>
+        <Label x:Name="___No_Name__Copy5" Content="chars per minute" HorizontalAlignment="Left" Height="59" Margin="698,319,0,0" VerticalAlignment="Top" Width="234" FontSize="30"/>
+        <ComboBox Name="ComboBox" HorizontalAlignment="Left" Margin="381,65,0,0" VerticalAlignment="Top" Width="312" Height="52" FontSize="30" Text="Choose level" SelectionChanged="ComboBox_SelectionChanged" IsEditable="True">
+            <ComboBoxItem>Level 1</ComboBoxItem>
+            <ComboBoxItem>Level 2</ComboBoxItem>
+            <ComboBoxItem>Level 3</ComboBoxItem>
+            <ComboBoxItem>Custom</ComboBoxItem>
+        </ComboBox>
 
     </Grid>
 </Window>
