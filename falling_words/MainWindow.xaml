@@ -16,10 +16,11 @@
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="650" VerticalAlignment="Top" Width="675">
             </Border>
         </Canvas>
-        <Label x:Name="WordsSpeed" Content="Words Speed:" HorizontalAlignment="Left" Margin="216,39,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
+        <Label x:Name="WordsSpeedLabel" Content="Words Speed:" HorizontalAlignment="Left" Margin="216,192,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
         <TextBox x:Name="UserInput" BorderThickness="0" HorizontalAlignment="Left" Height="74" Margin="43,655,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="632" TextChanged="UserInput_TextChanged" Grid.ColumnSpan="3" FontSize="36" TextAlignment="Center"/>
-        <Label x:Name="Result" Content="Your average speed:&#xA;" HorizontalAlignment="Left" Margin="211,231,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
+        <Label x:Name="ResultLabel" Content="Your average speed:&#xA;" HorizontalAlignment="Left" Margin="216,377,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
         <Button Content="Go To Menu" Grid.Column="2" HorizontalAlignment="Left" Margin="270,606,0,0" VerticalAlignment="Top" Width="234" Click="Button_Click" FontSize="30" Background="{x:Null}"/>
+        <Label x:Name="TimeLabel" Content="" HorizontalAlignment="Left" Margin="216,10,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
 
 
     </Grid>
