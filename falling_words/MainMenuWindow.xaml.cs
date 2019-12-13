@@ -81,7 +81,7 @@ namespace falling_words
                 else
                 {
                     int wordLength = GetWordLengthValue();
-                    var gameWindow = new MainWindow(startSpeed, endSpeed, wordLength, gameTime);
+                    var gameWindow = new MainWindow(new LevelSettings(startSpeed, endSpeed, wordLength, gameTime));
                     gameWindow.Show();
                     this.Close();
                 }

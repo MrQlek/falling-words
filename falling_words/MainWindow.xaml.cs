@@ -22,31 +22,32 @@ namespace falling_words
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly DispatcherTimer TimerGenerateNewWord = new DispatcherTimer();
+        private readonly DispatcherTimer TimerAnimation = new DispatcherTimer();
+        private readonly DispatcherTimer TimerChangeWordsSpeed = new DispatcherTimer();
+        private readonly DispatcherTimer TimerCountTime = new DispatcherTimer();
         private readonly DateTime StartTime;
+
         private int NumberOfWroteChars = 0;
-        private DispatcherTimer TimerGenerateNewWord = new DispatcherTimer();
-        private DispatcherTimer TimerAnimation = new DispatcherTimer();
-        private DispatcherTimer TimerChangeWordsSpeed = new DispatcherTimer();
-        private DispatcherTimer TimerCountTime = new DispatcherTimer();
-        private int CharSpeed;
-        private int WordsLength;
-        private int AddToCharSpeed;
+        private readonly LevelSettings Settings;
+        private float CharSpeed;
+        private readonly float AddToCharSpeed;
         private int Time;
         private int Counter = 1000000;
-        private int TimeBetweenWords;
-        private List<string> WordList = new List<string>();
+        private float TimeBetweenWords;
+        private readonly List<string> WordList = new List<string>();
 
-        public MainWindow(int startSpeed, int endSpeed, int wordsLength, int gameTime)
+        public MainWindow(LevelSettings settings)
         {
             InitializeComponent();
 
-            CharSpeed = startSpeed;
+            Settings = settings;
+            CharSpeed = Settings.StartSpeed;
 
-            WordsLength = wordsLength;
-            AddToCharSpeed = CountAddToCharSpeed(gameTime, startSpeed, endSpeed);
-            Time = gameTime;
+            AddToCharSpeed = CountAddToCharSpeed(Settings.GameTime, Settings.StartSpeed, Settings.EndSpeed);
+            Time = settings.GameTime;
             StartTime =  DateTime.Now;
-            TimeBetweenWords = 60000 / (CharSpeed / WordsLength);
+            TimeBetweenWords = 60000 / (CharSpeed / Settings.WordsLength);
 
             RefreshWordSpeed(CharSpeed);
             InitializeTimers();
@@ -58,7 +59,7 @@ namespace falling_words
             TimerAnimation.Tick += SetWordsNewPosition;
             TimerAnimation.Start();
 
-            TimerGenerateNewWord.Interval = TimeSpan.FromMilliseconds(10);
+            TimerGenerateNewWord.Interval = TimeSpan.FromMilliseconds(100);
             TimerGenerateNewWord.Tick += GenerateNewWord;
             TimerGenerateNewWord.Start();
 
@@ -91,7 +92,7 @@ namespace falling_words
             foreach (var wordLabel in Canvas1.Children.OfType<System.Windows.Controls.Label>())
             {
                 Canvas.SetTop(wordLabel, Canvas.GetTop(wordLabel) + 2 + (CharSpeed - 60)/60/4);
-                if (Canvas.GetTop(wordLabel) == 600)
+                if (Canvas.GetTop(wordLabel) >= 590)
                 {
                     lost = true;
                 }
@@ -99,7 +100,7 @@ namespace falling_words
             if(lost)
             {
                 StopGame();
-                ShowEndMessage("You lost. \nGo to menu and try again \nor pick easier level to train.");
+                ShowEndMessage("You lost. \nTry again or go to menu \nand pick easier level to train.");
             }
         }
 
@@ -145,12 +146,12 @@ namespace falling_words
 
         private void GenerateNewWord(object sender, EventArgs e)
         {
-            Counter += 10;
+            Counter += 100;
             if (Counter >= TimeBetweenWords)
             {
                 Counter = 0;
                 Random rnd = new Random();
-                string newWord = Words.GetWord(WordsLength);
+                string newWord = Words.GetWord(Settings.WordsLength);
                 Label wordLabel = new Label
                 {
                     Content = newWord,
@@ -160,7 +161,7 @@ namespace falling_words
                     BorderThickness = new Thickness(2)
                 };
                 WordList.Add(newWord);
-                Canvas.SetLeft(wordLabel, rnd.Next(675 - (25 * WordsLength)));
+                Canvas.SetLeft(wordLabel, rnd.Next(675 - (25 * Settings.WordsLength)));
                 Canvas.SetTop(wordLabel, 0);
                 Canvas1.Children.Add(wordLabel);
                 UserInput.Focus();
@@ -170,19 +171,26 @@ namespace falling_words
         private void SetNewWordsSpeed(object sender, EventArgs e)
         {
             CharSpeed += AddToCharSpeed;
-            TimeBetweenWords =  60000 / (CharSpeed / WordsLength);
+            TimeBetweenWords =  60000 / (CharSpeed / Settings.WordsLength);
             RefreshWordSpeed(CharSpeed);
         }
 
-        private void RefreshWordSpeed(int CharSpeed)
+        private void RefreshWordSpeed(float charSpeed)
         {
-            WordsSpeedLabel.Content = $"Words Speed: \n{CharSpeed} chars per minute";
+            WordsSpeedLabel.Content = $"Words Speed: \n{Math.Round(charSpeed)} chars per minute";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var mainMenuWindow = new MainMenuWindow();
             mainMenuWindow.Show();
+            this.Close();
+        }
+
+        private void Button_Click_TryAgain(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow(Settings);
+            mainWindow.Show();
             this.Close();
         }
 
@@ -197,7 +205,7 @@ namespace falling_words
             if(Time == 0)
             {
                 StopGame();
-                ShowEndMessage("Congratulations! \nYou won this level \nGo to menu and choose next level");
+                ShowEndMessage("Congratulations! \nYou won this level \nGo to menu and choose next level \nor try this one again");
             }
         }
 
@@ -218,12 +226,15 @@ namespace falling_words
 
         private void ShowEndMessage(string text)
         {
-            TextBlock wonLabel = new TextBlock
+            Label wonLabel = new Label
             {
-                Text = text,
+                Content = text,
                 Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0)),
                 FontSize = 30,
-                Background = new SolidColorBrush(Color.FromRgb(255, 255, 255))
+                Background = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(2),
+                Padding = new Thickness(20)
             };
             Canvas.SetLeft(wonLabel, 150);
             Canvas.SetTop(wonLabel, 250);

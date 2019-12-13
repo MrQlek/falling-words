@@ -13,7 +13,7 @@
             <ColumnDefinition Width="431*"/>
         </Grid.ColumnDefinitions>
         <Canvas x:Name="Canvas1" HorizontalAlignment="Left" Height="650" VerticalAlignment="Top" Width="675" Grid.ColumnSpan="3">
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="650" VerticalAlignment="Top" Width="675">
+            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="650" VerticalAlignment="Top" Width="675">
             </Border>
         </Canvas>
         <Label x:Name="WordsSpeedLabel" Content="Words Speed:" HorizontalAlignment="Left" Margin="216,192,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
@@ -21,6 +21,7 @@
         <Label x:Name="ResultLabel" Content="Your average speed:&#xA;" HorizontalAlignment="Left" Margin="216,377,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
         <Button Content="Go To Menu" Grid.Column="2" HorizontalAlignment="Left" Margin="270,606,0,0" VerticalAlignment="Top" Width="234" Click="Button_Click" FontSize="30" Background="{x:Null}"/>
         <Label x:Name="TimeLabel" Content="" HorizontalAlignment="Left" Margin="216,10,0,0" VerticalAlignment="Top" Width="328" Grid.Column="2" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="96"/>
+        <Button Content="Try again" Grid.Column="2" HorizontalAlignment="Left" Margin="270,536,0,0" VerticalAlignment="Top" Width="234" Click="Button_Click_TryAgain" FontSize="30" Background="{x:Null}"/>
 
 
     </Grid>
