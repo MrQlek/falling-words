@@ -29,6 +29,13 @@
             <ComboBoxItem>Level 1</ComboBoxItem>
             <ComboBoxItem>Level 2</ComboBoxItem>
             <ComboBoxItem>Level 3</ComboBoxItem>
+            <ComboBoxItem>Level 4</ComboBoxItem>
+            <ComboBoxItem>Level 5</ComboBoxItem>
+            <ComboBoxItem>Level 6</ComboBoxItem>
+            <ComboBoxItem>Level 7</ComboBoxItem>
+            <ComboBoxItem>Level 8</ComboBoxItem>
+            <ComboBoxItem>Level 9</ComboBoxItem>
+            <ComboBoxItem>Level 10</ComboBoxItem>
             <ComboBoxItem>Custom</ComboBoxItem>
         </ComboBox>
 

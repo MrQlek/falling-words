@@ -31,7 +31,7 @@ namespace falling_words
             int gameTime;
             int correctField = 0;
             if (Int32.TryParse(StartSpeed.Text, out startSpeed) == true 
-                && startSpeed >= 60
+                && startSpeed >= 100
                 && startSpeed <= 1000)
             {
                 StartSpeedErrorLabel.Visibility = Visibility.Hidden;
@@ -43,7 +43,7 @@ namespace falling_words
             }
 
             if (Int32.TryParse(EndSpeed.Text, out endSpeed) == true
-                && endSpeed >= 60
+                && endSpeed >= 100
                 && endSpeed <= 1000
                 && endSpeed >= startSpeed)
             {
@@ -104,10 +104,10 @@ namespace falling_words
         {
             if(ComboBox.SelectedIndex == 0)
             {
-                StartSpeed.Text = "60";
-                EndSpeed.Text = "210";
+                StartSpeed.Text = "100";
+                EndSpeed.Text = "100";
                 GameTime.Text = "30";
-                Radio3.IsChecked = true;
+                Radio5.IsChecked = true;
 
                 SetIsEnabledForAllFields(false);
 
@@ -115,8 +115,8 @@ namespace falling_words
             }
             if (ComboBox.SelectedIndex == 1)
             {
-                StartSpeed.Text = "60";
-                EndSpeed.Text = "210";
+                StartSpeed.Text = "100";
+                EndSpeed.Text = "100";
                 GameTime.Text = "30";
                 Radio4.IsChecked = true;
 
@@ -126,8 +126,8 @@ namespace falling_words
             }
             if (ComboBox.SelectedIndex == 2)
             {
-                StartSpeed.Text = "210";
-                EndSpeed.Text = "460";
+                StartSpeed.Text = "100";
+                EndSpeed.Text = "100";
                 GameTime.Text = "30";
                 Radio3.IsChecked = true;
 
@@ -136,6 +136,83 @@ namespace falling_words
                 StartButon.IsEnabled = true;
             }
             if (ComboBox.SelectedIndex == 3)
+            {
+                StartSpeed.Text = "250";
+                EndSpeed.Text = "250";
+                GameTime.Text = "30";
+                Radio5.IsChecked = true;
+
+                SetIsEnabledForAllFields(false);
+
+                StartButon.IsEnabled = true;
+            }
+            if (ComboBox.SelectedIndex == 4)
+            {
+                StartSpeed.Text = "250";
+                EndSpeed.Text = "250";
+                GameTime.Text = "30";
+                Radio4.IsChecked = true;
+
+                SetIsEnabledForAllFields(false);
+
+                StartButon.IsEnabled = true;
+            }
+            if (ComboBox.SelectedIndex == 5)
+            {
+                StartSpeed.Text = "250";
+                EndSpeed.Text = "250";
+                GameTime.Text = "30";
+                Radio3.IsChecked = true;
+
+                SetIsEnabledForAllFields(false);
+
+                StartButon.IsEnabled = true;
+            }
+            if (ComboBox.SelectedIndex == 6)
+            {
+                StartSpeed.Text = "300";
+                EndSpeed.Text = "300";
+                GameTime.Text = "60";
+                Radio4.IsChecked = true;
+
+                SetIsEnabledForAllFields(false);
+
+                StartButon.IsEnabled = true;
+            }
+            if (ComboBox.SelectedIndex == 7)
+            {
+                StartSpeed.Text = "425";
+                EndSpeed.Text = "425";
+                GameTime.Text = "60";
+                Radio5.IsChecked = true;
+
+                SetIsEnabledForAllFields(false);
+
+                StartButon.IsEnabled = true;
+            }
+            if (ComboBox.SelectedIndex == 8)
+            {
+                StartSpeed.Text = "425";
+                EndSpeed.Text = "425";
+                GameTime.Text = "60";
+                Radio4.IsChecked = true;
+
+                SetIsEnabledForAllFields(false);
+
+                StartButon.IsEnabled = true;
+            }
+            if (ComboBox.SelectedIndex == 9)
+            {
+                StartSpeed.Text = "600";
+                EndSpeed.Text = "600";
+                GameTime.Text = "90";
+                Radio4.IsChecked = true;
+
+                SetIsEnabledForAllFields(false);
+
+                StartButon.IsEnabled = true;
+            }
+            if (ComboBox.SelectedIndex == 10)
             {
                 SetIsEnabledForAllFields(true);
 
