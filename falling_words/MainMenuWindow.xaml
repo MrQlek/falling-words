@@ -11,7 +11,7 @@
         <Label x:Name="___No_Name__Copy" Content="End Speed(between 100 and 1000): " HorizontalAlignment="Left" Height="59" Margin="33,324,0,0" VerticalAlignment="Top" Width="478" FontSize="30"/>
         <Label x:Name="___No_Name__Copy1" Content="Words Length:" HorizontalAlignment="Left" Height="59" Margin="33,511,0,0" VerticalAlignment="Top" Width="208" FontSize="30"/>
         <Label x:Name="___No_Name__Copy2" Content="Time Of Game (in seconds between 30 and 300): " HorizontalAlignment="Left" Height="59" Margin="33,425,0,0" VerticalAlignment="Top" Width="660" FontSize="30"/>
-        <Button Name="StartButon" Content="Start Game" HorizontalAlignment="Left" Margin="456,645,0,0" VerticalAlignment="Top" Width="170" Click="Button_Click" FontSize="30" Background="{x:Null}" IsEnabled="False"/>
+        <Button Name="StartButon" Content="Start Game" HorizontalAlignment="Left" Margin="266,653,0,0" VerticalAlignment="Top" Width="170" Click="Button_Click" FontSize="30" Background="{x:Null}" IsEnabled="False"/>
         <TextBox x:Name="StartSpeed" HorizontalAlignment="Left" Height="54" Margin="535,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30" IsEnabled="False"/>
         <TextBox x:Name="EndSpeed" HorizontalAlignment="Left" Height="54" Margin="535,324,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30" IsEnabled="False" RenderTransformOrigin="1.141,0.37"/>
         <TextBox x:Name="GameTime" HorizontalAlignment="Left" Height="54" Margin="693,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="30" RenderTransformOrigin="0.522,1.5" IsEnabled="False"/>
@@ -38,6 +38,7 @@
             <ComboBoxItem>Level 10</ComboBoxItem>
             <ComboBoxItem>Custom</ComboBoxItem>
         </ComboBox>
+        <Button x:Name="StartButon_Copy" Content="Inforamation" HorizontalAlignment="Left" Margin="547,653,0,0" VerticalAlignment="Top" Width="199" FontSize="30" Background="{x:Null}" Click="StartButon_Copy_Click"/>
 
     </Grid>
 </Window>

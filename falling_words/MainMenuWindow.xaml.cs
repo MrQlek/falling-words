@@ -232,5 +232,13 @@ namespace falling_words
             Radio6.IsEnabled = setTo;
             Radio7.IsEnabled = setTo;
         }
+
+        private void StartButon_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            var infoWindow = new InfoWindow();
+            infoWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            infoWindow.Show();
+            this.Close();
+        }
     }
 }
