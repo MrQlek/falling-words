@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:falling_words"
         mc:Ignorable="d"
-        Title="MainMenuWindow" Height="768" Width="1024" ResizeMode="NoResize">
+        Title="Falling Words" Height="768" Width="1024" ResizeMode="NoResize">
     <Grid Margin="0,-27,0,27">
         <Label x:Name="___No_Name_" Content="Start Speed(between 60 and 1000): " HorizontalAlignment="Left" Height="59" Margin="33,218,0,0" VerticalAlignment="Top" Width="478" FontSize="30"/>
         <Label x:Name="___No_Name__Copy" Content="End Speed(between 60 and 1000): " HorizontalAlignment="Left" Height="59" Margin="33,324,0,0" VerticalAlignment="Top" Width="478" FontSize="30"/>

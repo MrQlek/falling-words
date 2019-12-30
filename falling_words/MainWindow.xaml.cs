@@ -78,6 +78,8 @@ namespace falling_words
             TimerGenerateNewWord.Stop();
             TimerChangeWordsSpeed.Stop();
             TimerCountTime.Stop();
+
+            UserInput.IsEnabled = false;
         }
 
         private int CountAddToCharSpeed(int gameTime, int startSpeed, int stopSpeed)
@@ -183,6 +185,7 @@ namespace falling_words
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var mainMenuWindow = new MainMenuWindow();
+            mainMenuWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             mainMenuWindow.Show();
             this.Close();
         }
@@ -190,6 +193,7 @@ namespace falling_words
         private void Button_Click_TryAgain(object sender, RoutedEventArgs e)
         {
             var mainWindow = new MainWindow(Settings);
+            mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             mainWindow.Show();
             this.Close();
         }
