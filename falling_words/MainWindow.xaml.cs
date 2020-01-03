@@ -93,7 +93,7 @@ namespace falling_words
             if(lost)
             {
                 StopGame();
-                ShowEndMessage("You lost. \nTry again or go to menu \nand pick easier level to train.");
+                ShowEndMessage("You lost. \nTry again or go to the menu \nand pick easier level to train.");
             }
         }
 
@@ -231,7 +231,7 @@ namespace falling_words
                 BorderThickness = new Thickness(2),
                 Padding = new Thickness(20)
             };
-            Canvas.SetLeft(wonLabel, 150);
+            Canvas.SetLeft(wonLabel, 50);
             Canvas.SetTop(wonLabel, 250);
             Canvas1.Children.Add(wonLabel);
         }
