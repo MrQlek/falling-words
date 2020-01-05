@@ -8,9 +8,7 @@ using System.Windows.Threading;
 
 namespace falling_words
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /// Game window
     public partial class MainWindow : Window
     {
         private readonly DispatcherTimer TimerGenerateNewWord = new DispatcherTimer();
@@ -28,6 +26,8 @@ namespace falling_words
         private float TimeBetweenWords;
         private readonly List<string> WordList = new List<string>();
 
+        
+        /// Initialize game window
         public MainWindow(LevelSettings settings)
         {
             InitializeComponent();
@@ -44,6 +44,7 @@ namespace falling_words
             InitializeTimers();
         }
 
+        /// Inialize all needed timers
         private void InitializeTimers()
         {
             TimerAnimation.Interval = TimeSpan.FromMilliseconds(1);
@@ -63,6 +64,7 @@ namespace falling_words
             TimerCountTime.Start();
         }
 
+        /// Stop all timers and disable UserInput field
         private void StopGame()
         {
             TimerAnimation.Stop();
@@ -73,12 +75,14 @@ namespace falling_words
             UserInput.IsEnabled = false;
         }
 
+        /// counts how fast chars speed will change
         private int CountAddToCharSpeed(int gameTime, int startSpeed, int stopSpeed)
         {
             gameTime -= 10;
             return (int)Math.Ceiling((stopSpeed - startSpeed) / (float)gameTime);
         }
 
+        /// Animate words falling and check if user lost 
         void SetWordsNewPosition(object sender, EventArgs e)
         {
             bool lost = false;
@@ -97,6 +101,7 @@ namespace falling_words
             }
         }
 
+        /// Check if user correctly written a word
         private void UserInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (WordList.Contains(UserInput.Text))
@@ -109,6 +114,7 @@ namespace falling_words
             }
         }
 
+        /// Find labels that contains written by user word
         private List<Label> FindLabelsToRemove(Canvas canvas, string text)
         {
             List<Label> wordsToRemove = new List<Label>();
@@ -122,6 +128,7 @@ namespace falling_words
             return wordsToRemove;
         }
 
+        /// Remove given labels from canvas
         private void RemoveLabels(Canvas canvas, List<Label> labelsList)
         {
             foreach (Label wordToRemove in labelsList)
@@ -130,6 +137,7 @@ namespace falling_words
             }
         }
 
+        /// Count and dispaly average speed
         private void RefreshResult(int wordLength)
         {
             NumberOfWroteChars += wordLength;
@@ -137,6 +145,8 @@ namespace falling_words
             ResultLabel.Content = $"Your average speed: \n{Math.Floor(NumberOfWroteChars/timeFromStart)}chars per minute";
         }
 
+
+        /// Generate new word and add it to Canvas
         private void GenerateNewWord(object sender, EventArgs e)
         {
             Counter += 100;
@@ -161,6 +171,7 @@ namespace falling_words
             }
         }
 
+        /// Count and set new words speed
         private void SetNewWordsSpeed(object sender, EventArgs e)
         {
             CharSpeed += AddToCharSpeed;
@@ -168,11 +179,13 @@ namespace falling_words
             RefreshWordSpeed(CharSpeed);
         }
 
+        /// Display actual words speed
         private void RefreshWordSpeed(float charSpeed)
         {
             WordsSpeedLabel.Content = $"Words Speed: \n{Math.Round(charSpeed)} chars per minute";
         }
 
+        /// Go to main menu window
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var mainMenuWindow = new MainMenuWindow();
@@ -181,6 +194,7 @@ namespace falling_words
             this.Close();
         }
 
+        /// Go to new game window with same level settings
         private void Button_Click_TryAgain(object sender, RoutedEventArgs e)
         {
             var mainWindow = new MainWindow(Settings);
@@ -189,6 +203,7 @@ namespace falling_words
             this.Close();
         }
 
+        /// Count time and check win condition
         private void CountTime(object sender, EventArgs e)
         {
             Time -= 1;
@@ -204,6 +219,7 @@ namespace falling_words
             }
         }
 
+        /// Dispaly clock value
         private void SetTimer(int time)
         {
             int minutes = time / 60;
@@ -219,6 +235,7 @@ namespace falling_words
             }
         }
 
+        /// Dsplay message for user
         private void ShowEndMessage(string text)
         {
             Label wonLabel = new Label

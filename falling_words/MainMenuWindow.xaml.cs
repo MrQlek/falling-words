@@ -1,22 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace falling_words
 {
-    /// <summary>
-    /// Interaction logic for MainMenuWindow.xaml
-    /// </summary>
+    /// Window with menu
     public partial class MainMenuWindow : Window
     {
         public MainMenuWindow()
@@ -24,6 +12,7 @@ namespace falling_words
             InitializeComponent();
         }
 
+        /// Check inputs values and go to game window
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int startSpeed = 0;
@@ -90,6 +79,7 @@ namespace falling_words
 
         }
 
+        /// Getting radio button value
         private int GetWordLengthValue()
         {
             if (Radio3.IsChecked == true) return 3;
@@ -101,6 +91,8 @@ namespace falling_words
             throw new ArgumentOutOfRangeException("Non radio button is checked.");
         }
 
+
+        /// Set level settings depending on selected level
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(ComboBox.SelectedIndex == 0)
@@ -221,6 +213,7 @@ namespace falling_words
             }
         }
 
+        /// Changing Is Enabled propertis for all fields in window
         private void SetIsEnabledForAllFields(bool setTo)
         {
             StartSpeed.IsEnabled = setTo;
@@ -233,6 +226,7 @@ namespace falling_words
             Radio7.IsEnabled = setTo;
         }
 
+        /// Go to information window
         private void StartButon_Copy_Click(object sender, RoutedEventArgs e)
         {
             var infoWindow = new InfoWindow();

@@ -2,9 +2,7 @@
 
 namespace falling_words
 {
-    /// <summary>
-    /// Interaction logic for InfoWindow.xaml
-    /// </summary>
+    /// Window with informations about game
     public partial class InfoWindow : Window
     {
         public InfoWindow()
@@ -12,6 +10,7 @@ namespace falling_words
             InitializeComponent();
         }
 
+        /// Go to main menu
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var menuWindow = new MainMenuWindow();

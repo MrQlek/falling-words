@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace falling_words
 {
+    /// Class used to keep informations about level settings
     public class LevelSettings
     {
         public readonly int StartSpeed;
@@ -13,6 +14,7 @@ namespace falling_words
         public readonly int WordsLength;
         public readonly int GameTime;
 
+        /// Class constructor with value control
         public LevelSettings(int startSpeed, int endSpeed, int wordsLength, int gameTime)
         {
             if(startSpeed < 100 ||
