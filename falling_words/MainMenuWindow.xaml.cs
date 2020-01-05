@@ -4,6 +4,18 @@ using System.Windows.Controls;
 
 namespace falling_words
 {
+    /*! \mainpage Dokumentacja gry 
+ * 
+ * \section intro_sec Tytuł gry: 
+ * 
+ * Falling words
+ * 
+ * \section install_sec Wykonał:
+ * 
+ * Kacper Czajkowski 171617
+ * 
+ */
+
     /// Window with menu
     public partial class MainMenuWindow : Window
     {
